@@ -24,6 +24,10 @@ public class Poblacion {
         }
     }
     
+    public int tamanioPoblacion(){
+        return tamanioPoblacion;
+    }
+    
     public Individuo getIndividuo(int posicion){
         return individuos[posicion];
     }

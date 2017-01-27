@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -22,7 +23,7 @@ public class AlgEv {
     
     private static final double mutacion = 0.015;
     private static final int numeroGeneraciones = 90;
-    private static final int tamTorneo = 2;
+    private static final int tamTorneo = 5;
     
     public static void leerFicheros(String fichero) throws FileNotFoundException{
         Scanner lector = new Scanner(new File(fichero));
@@ -52,12 +53,21 @@ public class AlgEv {
         padres[0] = new Individuo();
         padres[1] = new Individuo();
         
-        //Poblacion torneo = new Poblacion(tamTorneo);
+        Poblacion torneo = new Poblacion(tamTorneo);
+        Random ran = new Random();
         
-        for(int i=0; i<; i++){
+        int indicePoblacion; 
+        int mipobtamanio = mipoblacion.tamanioPoblacion();
+	//Set<Integer> selectedIndiv = new HashSet<>();
+
+        indicePoblacion = ran.nextInt(mipobtamanio);
+        
+        for(int i=0; i<tamTorneo; i++){
+            //Individuo torneoIndividuo = mipoblacion.getIndividuo(i);
             
+
         }
-        //torneo.getMejor();
+        torneo.getMejor();
  
         return padres;
     }
@@ -196,7 +206,7 @@ public class AlgEv {
         leerFicheros("qap.datos/tai256c.dat");
         System.out.println(tamanioProblema);
         
-        AlgEv solucion;
+        AlgEv solucion = null;
         
         System.out.println("Elige el algoritmo introducieno:");
         System.out.println("\t-Algoritmo Simple -> A:");

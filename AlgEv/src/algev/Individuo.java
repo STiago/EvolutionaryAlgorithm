@@ -55,5 +55,11 @@ public class Individuo{
             }
         }
     }
+
+    //Recalcular fitness con busqueda local para baldwiniano y lamarckiano
+    void calcFitnessMejorado(/*AlgEv al*/) {
+        //Busqueda local
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

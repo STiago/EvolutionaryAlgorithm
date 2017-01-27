@@ -88,4 +88,10 @@ public class Poblacion {
          }
     }
     
+    public void calcFitnessMejorado(/*AlgEv al*/) {
+        for (int i = 0; i < individuos.length; i++) {
+            individuos[i].calcFitnessMejorado(/*al*/);
+        }
+    }
+    
 }

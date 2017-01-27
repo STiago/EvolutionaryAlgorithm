@@ -23,7 +23,18 @@ public class AlgEv {
     
     private static final double mutacion = 0.015;
     private static final int numeroGeneraciones = 90;
+    
     private static final int tamTorneo = 5;
+    
+    //Actual poblacion
+    private Poblacion poblacion;
+    private final int tammPoblacion= 100;
+    
+    public AlgEv() {
+        poblacion = new Poblacion(tammPoblacion); //crea poblacion e inicializa a random
+        poblacion.calcFitnessMejorado();
+    }
+    
     
     //Métoo para leer el fichero de matrices
     public static void leerFicheros(String fichero) throws FileNotFoundException{
@@ -58,6 +69,7 @@ public class AlgEv {
                
         Poblacion torneo = new Poblacion(tamTorneo);
         Poblacion torneo2 = new Poblacion(tamTorneo);
+        
         int mipobtamanio = mipoblacion.tamanioPoblacion();
         //Random ran = new Random();
         //int indicePoblacion; 
@@ -158,6 +170,11 @@ public class AlgEv {
         }
                  
     }
+    /*
+    //Get Fittest
+    public Individuo getFittest() {
+        return poblacion.getMejor();
+    }*/
     
     //Algoritmo simple
     public void AlgoritmoSimple(){
@@ -220,7 +237,7 @@ public class AlgEv {
         leerFicheros("qap.datos/tai256c.dat");
         System.out.println(tamanioProblema);
         
-        AlgEv solucion = null;
+        AlgEv solucion = null ;
         
         System.out.println("Elige el algoritmo introducieno:");
         System.out.println("\t-Algoritmo Simple -> A:");

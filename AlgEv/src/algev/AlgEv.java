@@ -30,12 +30,21 @@ public class AlgEv {
     private Poblacion poblacion;
     private final int tammPoblacion= 100;
     
+    /*
     public AlgEv() {
         poblacion = new Poblacion(tammPoblacion); //crea poblacion e inicializa a random
         poblacion.calcFitnessMejorado();
+    }*/
+    
+    public AlgEv(int tamPro, int [][] dist, int [][] pes){
+        this.tamanioProblema = tamPro;
+        this.distancias = new int[this.tamanioProblema][this.tamanioProblema];
+        this.pesos = new int[this.tamanioProblema][this.tamanioProblema];
+        //System.arrayCopy(aOrigen,inicioArrayOrigen,aDestino,inicioArrayDestino,numeroElementosACopiar);
+        System.arraycopy(dist, 0, this.distancias, 0, dist.length);
+        System.arraycopy(pes, 0, this.pesos, 0, pes.length);
     }
-    
-    
+        
     //Métoo para leer el fichero de matrices
     public static void leerFicheros(String fichero) throws FileNotFoundException{
         Scanner lector = new Scanner(new File(fichero));
@@ -236,8 +245,16 @@ public class AlgEv {
         // TODO code application logic here
         leerFicheros("qap.datos/tai256c.dat");
         System.out.println(tamanioProblema);
+        System.out.println(distancias);
+        System.out.println(pesos);
         
-        AlgEv solucion = null ;
+        int tamPob = tamanioProblema, generations = 100;
+	double mutProb = 0.15;
+        int [][] d = distancias;
+        int [][] p = pesos;      
+                
+        AlgEv solucion;
+        solucion = new AlgEv(tamPob,d,p) ;
         
         System.out.println("Elige el algoritmo introducieno:");
         System.out.println("\t-Algoritmo Simple -> A:");
@@ -256,7 +273,7 @@ public class AlgEv {
                     System.out.println("Algoritmo Baldwiniano");
                     solucion.AlgoritmoBaldwiniano();
                     break;
-                case "C":
+                case "L":
                     System.out.println("Algoritmo Lamarckiano");
                     solucion.AlgoritmoLamarckiano();
                     break;

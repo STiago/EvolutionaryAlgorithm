@@ -38,6 +38,11 @@ public class Poblacion {
     public Individuo getIndividuo(int posicion){
         return individuos[posicion];
     }
+    
+    //Metodo para consultar toda la poblacion
+    public Individuo[] getTodosIndividuos() {
+        return individuos;
+    }
 
     //Metodo para quedarse con el mejor
     public Individuo getMejor(){

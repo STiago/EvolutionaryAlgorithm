@@ -29,6 +29,7 @@ public class AlgEv {
     //Actual poblacion
     private Poblacion poblacion;
     private final int tammPoblacion= 100;
+     private Individuo mejorIndivi;
     
     /*
     public AlgEv() {
@@ -187,7 +188,7 @@ public class AlgEv {
     
     //Algoritmo simple
     public void AlgoritmoSimple(){
-        Poblacion poblacion = new Poblacion(30);
+        Poblacion pobla= new Poblacion(30);
         
         for(int i=0; i<numeroGeneraciones; i++){
             Poblacion nuevapoblacion = new Poblacion(30);
@@ -199,6 +200,21 @@ public class AlgEv {
             Mutacion(hijos[0]);
             Mutacion(hijos[1]);
             
+            hijos[0].getFitness();
+            hijos[1].getFitness();
+            
+            //Insertamos los hijos en la nueva poblacion
+            pobla.setIndividuo(i, hijos[0]);
+            pobla.setIndividuo(i+1, hijos[0]);
+            
+            //this.poblacion = pobla new Individuo[tammPoblacion];
+            pobla.getTodosIndividuos()[0] = /*new Individuo(*/poblacion.getMejor();//);
+            pobla.calcFitnessMejorado();
+            poblacion = pobla;
+            //this.mejorIndivi = new Individuo(this.calculaFitness());
+            System.out.println("Generación " + i + ": " + this.mejorIndivi.getFitness());
+            System.out.println("\nLa solucion: " + Arrays.toString(poblacion.getMejor().getSolucion()));
+            System.out.println("\nFitness: " + poblacion.getMejor().getFitness());
         }
     
     }
@@ -216,7 +232,7 @@ public class AlgEv {
             //Mutacion
             Mutacion(hijos[0]);
             Mutacion(hijos[1]);
-            
+            //Insertamos los hijos en la nueva poblacion
         }
     }
     
@@ -270,8 +286,8 @@ public class AlgEv {
         int [][] d = distancias;
         int [][] p = pesos;      
                 
-        AlgEv solucion;
-        solucion = new AlgEv(tamPob,d,p);
+        AlgEv solucionAlg;
+        solucionAlg = new AlgEv(tamPob,d,p);
         
         long inicioAlg, finAlg;
         
@@ -288,7 +304,7 @@ public class AlgEv {
                     System.out.println("Algoritmo simple");
                     System.out.println("Ejecutando...");
                     inicioAlg= System.currentTimeMillis();
-                    solucion.AlgoritmoSimple();
+                    solucionAlg.AlgoritmoSimple();
                     finAlg= System.currentTimeMillis();
                     System.out.println("-------------- Resultados Algoritmo simple --------------");
                     System.out.println("Time: " + (finAlg - inicioAlg) / 1000);
@@ -297,7 +313,7 @@ public class AlgEv {
                     System.out.println("Algoritmo Baldwiniano");
                     System.out.println("Ejecutando...");
                     inicioAlg= System.currentTimeMillis();
-                    solucion.AlgoritmoBaldwiniano();
+                    solucionAlg.AlgoritmoBaldwiniano();
                     finAlg= System.currentTimeMillis();
                     System.out.println("-------------- Resultados Algoritmo Baldwiniano --------------");
                     System.out.println("Time: " + (finAlg - inicioAlg) / 1000);
@@ -306,7 +322,7 @@ public class AlgEv {
                     System.out.println("Algoritmo Lamarckiano");
                     System.out.println("Ejecutando...");
                     inicioAlg= System.currentTimeMillis();
-                    solucion.AlgoritmoLamarckiano();
+                    solucionAlg.AlgoritmoLamarckiano();
                     finAlg= System.currentTimeMillis();
                     System.out.println("-------------- Resultados Algoritmo Lamarckiano --------------");
                     System.out.println("Time: " + (finAlg - inicioAlg) / 1000);

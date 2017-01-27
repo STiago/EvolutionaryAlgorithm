@@ -12,6 +12,7 @@ public class Individuo{
     
     private int fitness = 0;
     private int[] genes = null;
+    private int[] mejorsolucion;
    
     
     public Individuo(){
@@ -61,5 +62,28 @@ public class Individuo{
         //Busqueda local
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    //Metodo solucion
+    public int[] getSolucion(){
+        int tsolucion=mejorsolucion.length;
+        
+        for(int i=0; i<tsolucion; i++ ){
+            mejorsolucion[i] = i;
+        }
+        Herramientas.shuffleArray(mejorsolucion);
+        calculaFitness();
+        return mejorsolucion;
+    }
+    
+    @Override
+    public String toString() {
+        String cadena = "[";
+
+        for (int i : genes) {
+            cadena += "" + i + " ";
+        }
+
+        return cadena.substring(0, cadena.length() - 1) + "]";
+}
     
 }

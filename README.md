@@ -1,6 +1,6 @@
 # María Victoria Santiago Alcalá
 
-## Inteligencia Computacional - Evolucionary Algorithm
+## Inteligencia Computacional - Evolutionary Algorithm
 
 ### Curso 2016-2017
 

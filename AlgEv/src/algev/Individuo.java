@@ -8,7 +8,7 @@ package algev;
  *
  * @author victoria
  */
-public class Individuo {
+public class Individuo{
     
     private int fitness = 0;
     private int[] genes = null;

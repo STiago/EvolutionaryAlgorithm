@@ -28,10 +28,14 @@ public class Poblacion {
         return tamanioPoblacion;
     }
     
+    public void setIndividuo(int posicion, Individuo valor){
+        individuos[posicion] = valor;
+    }
+    
     public Individuo getIndividuo(int posicion){
         return individuos[posicion];
     }
-    
+    //Set<Integer> selectedIndiv = new HashSet<>();
     public Individuo getMejor(){
         Individuo mejor = individuos[0];
         
@@ -45,6 +49,39 @@ public class Poblacion {
     
     public void guardarIndividuo(int posicion, Individuo indivi){
         individuos[posicion] = indivi;
+    }
+
+//Métodos para buscar y eliminar
+    public int buscaElemento(Individuo ele){
+        int posicion = -1;
+        boolean encontrado = false;
+        
+        for(int i=0; i<tamanioPoblacion && !encontrado ; i++){
+           if(individuos[i] == ele){
+              encontrado = true;
+              posicion=i; 
+           }
+        }
+        return posicion;
+      }
+      
+    public void eliminaPosicion(int pos){
+        if(pos>-1 && pos<tamanioPoblacion){
+           for(int i=pos; i<tamanioPoblacion ; i++){
+              individuos[i] = individuos[i+1];
+           }
+           tamanioPoblacion--;
+        }
+      }
+
+    public void eliminaElemento(Individuo ele){
+         int posicion;
+    
+         posicion= buscaElemento(ele);
+         
+         if(posicion > -1){
+           eliminaPosicion(posicion);
+         }
     }
     
 }

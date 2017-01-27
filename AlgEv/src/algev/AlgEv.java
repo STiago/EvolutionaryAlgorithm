@@ -52,23 +52,31 @@ public class AlgEv {
         Individuo[] padres = new Individuo[2];
         padres[0] = new Individuo();
         padres[1] = new Individuo();
-        
+               
         Poblacion torneo = new Poblacion(tamTorneo);
-        Random ran = new Random();
-        
-        int indicePoblacion; 
+        //Random ran = new Random();
+        //int indicePoblacion; 
         int mipobtamanio = mipoblacion.tamanioPoblacion();
-	//Set<Integer> selectedIndiv = new HashSet<>();
+	
 
-        indicePoblacion = ran.nextInt(mipobtamanio);
-        
+                
         for(int i=0; i<tamTorneo; i++){
-            //Individuo torneoIndividuo = mipoblacion.getIndividuo(i);
-            
+           
+            int participante = (int) Math.floor(Math.random() * mipobtamanio);
+            //torneo[i] = new Individuo(mipoblacion[participante]);
+            torneo.setIndividuo(i,mipoblacion.getIndividuo(participante));
 
+            //indicePoblacion = ran.nextInt(mipobtamanio);
+            //torneo.guardarIndividuo(i, mipoblacion.getIndividuo(indicePoblacion));
+            
         }
-        torneo.getMejor();
- 
+        padres[0] = torneo.getMejor();
+        torneo.eliminaElemento(torneo.getMejor());
+            
+        do{
+            padres[1] = torneo.getMejor();
+        }while(padres[0]==padres[1]);
+        
         return padres;
     }
     

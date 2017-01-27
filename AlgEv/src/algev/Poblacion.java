@@ -24,18 +24,22 @@ public class Poblacion {
         }
     }
     
+    //Metodo para conocer el tamanio de la poblacion
     public int tamanioPoblacion(){
         return tamanioPoblacion;
     }
     
+    //Metodo para insertar un nuevo individuo dada su posicion y el valor 
     public void setIndividuo(int posicion, Individuo valor){
         individuos[posicion] = valor;
     }
     
+    //Metodo para consultar un individuo dada su posicion
     public Individuo getIndividuo(int posicion){
         return individuos[posicion];
     }
-    //Set<Integer> selectedIndiv = new HashSet<>();
+
+    //Metodo para quedarse con el mejor
     public Individuo getMejor(){
         Individuo mejor = individuos[0];
         

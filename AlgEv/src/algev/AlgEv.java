@@ -25,6 +25,7 @@ public class AlgEv {
     private static final int numeroGeneraciones = 90;
     private static final int tamTorneo = 5;
     
+    //Métoo para leer el fichero de matrices
     public static void leerFicheros(String fichero) throws FileNotFoundException{
         Scanner lector = new Scanner(new File(fichero));
         tamanioProblema = lector.nextInt();
@@ -44,42 +45,44 @@ public class AlgEv {
         }
     }
     
+    //Metodo para devolver el tamanio del problema
     public int tamanio(){
         return tamanioProblema;
     }
     
+    //Método de seleccion del individuo por torneo
     public Individuo [] Seleccion(Poblacion mipoblacion){
         Individuo[] padres = new Individuo[2];
         padres[0] = new Individuo();
         padres[1] = new Individuo();
                
         Poblacion torneo = new Poblacion(tamTorneo);
+        Poblacion torneo2 = new Poblacion(tamTorneo);
+        int mipobtamanio = mipoblacion.tamanioPoblacion();
         //Random ran = new Random();
         //int indicePoblacion; 
-        int mipobtamanio = mipoblacion.tamanioPoblacion();
-	
-
-                
-        for(int i=0; i<tamTorneo; i++){
-           
+        
+        for(int i=0; i<tamTorneo; i++){   
             int participante = (int) Math.floor(Math.random() * mipobtamanio);
-            //torneo[i] = new Individuo(mipoblacion[participante]);
+            int participante2 = (int) Math.floor(Math.random() * mipobtamanio);
+            
             torneo.setIndividuo(i,mipoblacion.getIndividuo(participante));
+            torneo2.setIndividuo(i,mipoblacion.getIndividuo(participante2));
+            //torneo[i] = new Individuo(mipoblacion[participante]);
 
             //indicePoblacion = ran.nextInt(mipobtamanio);
-            //torneo.guardarIndividuo(i, mipoblacion.getIndividuo(indicePoblacion));
-            
+            //torneo.guardarIndividuo(i, mipoblacion.getIndividuo(indicePoblacion));    
         }
         padres[0] = torneo.getMejor();
-        torneo.eliminaElemento(torneo.getMejor());
-            
+        //torneo.eliminaElemento(torneo.getMejor());    
         do{
-            padres[1] = torneo.getMejor();
+            padres[1] = torneo2.getMejor();
         }while(padres[0]==padres[1]);
         
         return padres;
     }
     
+    //Metodo de cruce
     public Individuo [] Cruce(Individuo padre, Individuo madre){
         Individuo[] hijos = new Individuo[2];
         hijos[0] = new Individuo();
@@ -132,6 +135,8 @@ public class AlgEv {
         
         return hijos;
     }
+    
+    //Metodo para intercambiar elementos
     /*
     public void Intercambia(int primero, int segundo){
 		int auxiliar;
@@ -141,6 +146,7 @@ public class AlgEv {
 		segundo = auxiliar;
     }*/
     
+    //Método para realizar la mutacion    
     public void Mutacion(Individuo aMutar){
         for(int i=0; i<aMutar.tamanio(); i++){
             if (Math.random() <= mutacion) {   
@@ -171,7 +177,7 @@ public class AlgEv {
     
     }
     
-    //Algoritmo B
+    //Algoritmo Baldwiniano
     public void AlgoritmoBaldwiniano(){
         Poblacion poblacion = new Poblacion(30);
         
@@ -188,7 +194,7 @@ public class AlgEv {
         }
     }
     
-    //Algoritmo L
+    //Algoritmo Lamarckiano
     public void AlgoritmoLamarckiano(){
         Poblacion poblacion = new Poblacion(30);
         

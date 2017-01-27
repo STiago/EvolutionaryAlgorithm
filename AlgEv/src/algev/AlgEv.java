@@ -22,14 +22,14 @@ public class AlgEv {
     public static int [][] pesos;
     
     private static final double mutacion = 0.015;
-    private static final int numeroGeneraciones = 90;
+    private static final int numeroGeneraciones = 20;
     
     private static final int tamTorneo = 5;
     
     //Actual poblacion
     //private Poblacion poblacion;
-    private final int tammPoblacion= 100;
-     private Individuo mejorIndivi;
+    private final int tammPoblacion= 10;
+    private Individuo mejorIndivi;
     
     /*
     public AlgEv() {
@@ -188,35 +188,35 @@ public class AlgEv {
     
     //Algoritmo simple
     public void AlgoritmoSimple(){
-        Poblacion pobla= new Poblacion(30);
-        
+        Poblacion pobla= new Poblacion(tammPoblacion);
+         
         for(int i=0; i<numeroGeneraciones; i++){
-            Poblacion nuevapoblacion = new Poblacion(30);
+            Poblacion nuevapoblacion = new Poblacion(tammPoblacion);
             for(int j=0; j<tammPoblacion/2; j++){
-            //Seleccion;
-            Individuo[] padres = Seleccion(pobla);
-            //Cruce
-            Individuo[] hijos = Cruce(padres[0], padres[1]);
-            //Mutacion
-            Mutacion(hijos[0]);
-            Mutacion(hijos[1]);
-            
-            hijos[0].getFitness();
-            hijos[1].getFitness();
-            
-            //Insertamos los hijos en la nueva poblacion
-            pobla.setIndividuo(j, hijos[0]);
-            pobla.setIndividuo(j+1, hijos[1]);
+                //Seleccion;
+                Individuo[] padres = Seleccion(pobla);
+                //Cruce
+                Individuo[] hijos = Cruce(padres[0], padres[1]);
+                //Mutacion
+                Mutacion(hijos[0]);
+                Mutacion(hijos[1]);
+
+                hijos[0].getFitness();
+                hijos[1].getFitness();
+
+                //Insertamos los hijos en la nueva poblacion
+                pobla.setIndividuo(j, hijos[0]);
+                pobla.setIndividuo(j+1, hijos[1]);
             }
+            nuevapoblacion.getTodosIndividuos()[0] = pobla.getMejor();
             pobla = nuevapoblacion;
             Individuo mejor = pobla.getMejor();
-            //this.poblacion = pobla new Individuo[tammPoblacion];
-            pobla.getTodosIndividuos()[0] = /*new Individuo(*/pobla.getMejor();//);
+            
             //pobla.calcFitnessMejorado();
                         
             System.out.println("Generación " + i + ": " );
             //System.out.println("\nLa solucion: " + mejor.getGenes(i));
-            System.out.println("\nLa solucion: " + Arrays.toString(mejor.getSolution()));
+            System.out.println("\nLa solucion: " + Arrays.toString(mejor.getGenes()));
             System.out.println("\nFitness: " + mejor.getFitness());
         }
     
@@ -224,10 +224,10 @@ public class AlgEv {
     
     //Algoritmo Baldwiniano
     public void AlgoritmoBaldwiniano(){
-        Poblacion poblacion = new Poblacion(30);
+        Poblacion poblacion = new Poblacion(tammPoblacion);
         
         for(int i=0; i<numeroGeneraciones; i++){
-            Poblacion nuevapoblacion = new Poblacion(30);
+            Poblacion nuevapoblacion = new Poblacion(tammPoblacion);
             //Seleccion
             Individuo[] padres = Seleccion(poblacion);
             //Cruce
@@ -241,10 +241,10 @@ public class AlgEv {
     
     //Algoritmo Lamarckiano
     public void AlgoritmoLamarckiano(){
-        Poblacion poblacion = new Poblacion(30);
+        Poblacion poblacion = new Poblacion(tammPoblacion);
         
         for(int i=0; i<numeroGeneraciones; i++){
-            Poblacion nuevapoblacion = new Poblacion(30);
+            Poblacion nuevapoblacion = new Poblacion(tammPoblacion);
             //Seleccion
             Individuo[] padres = Seleccion(poblacion);
             //Cruce
@@ -284,8 +284,8 @@ public class AlgEv {
         }
         
         
-        int tamPob = tamanioProblema, generations = 100;
-	double mutProb = 0.15;
+        int tamPob = tamanioProblema, generations = numeroGeneraciones;
+	double mutProb = mutacion;
         int [][] d = distancias;
         int [][] p = pesos;      
                 

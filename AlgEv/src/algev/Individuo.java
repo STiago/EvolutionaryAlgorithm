@@ -33,6 +33,10 @@ public class Individuo{
         genes[posicion] = nuevovalor;
     }
     
+    public int[] getGenes() { 
+        return genes;
+    }
+    
     public int getGenes(int posicion) {
         return this.genes[posicion];
     }

@@ -27,7 +27,7 @@ public class AlgEv {
     private static final int tamTorneo = 5;
     
     //Actual poblacion
-    private Poblacion poblacion;
+    //private Poblacion poblacion;
     private final int tammPoblacion= 100;
      private Individuo mejorIndivi;
     
@@ -97,9 +97,9 @@ public class AlgEv {
         }
         padres[0] = torneo.getMejor();
         //torneo.eliminaElemento(torneo.getMejor());    
-        do{
-            padres[1] = torneo2.getMejor();
-        }while(padres[0]==padres[1]);
+        
+        padres[1] = torneo2.getMejor();
+        
         
         return padres;
     }
@@ -192,8 +192,9 @@ public class AlgEv {
         
         for(int i=0; i<numeroGeneraciones; i++){
             Poblacion nuevapoblacion = new Poblacion(30);
-            //Seleccion
-            Individuo[] padres = Seleccion(poblacion);
+            for(int j=0; j<tammPoblacion/2; j++){
+            //Seleccion;
+            Individuo[] padres = Seleccion(pobla);
             //Cruce
             Individuo[] hijos = Cruce(padres[0], padres[1]);
             //Mutacion
@@ -204,17 +205,19 @@ public class AlgEv {
             hijos[1].getFitness();
             
             //Insertamos los hijos en la nueva poblacion
-            pobla.setIndividuo(i, hijos[0]);
-            pobla.setIndividuo(i+1, hijos[0]);
-            
+            pobla.setIndividuo(j, hijos[0]);
+            pobla.setIndividuo(j+1, hijos[1]);
+            }
+            pobla = nuevapoblacion;
+            Individuo mejor = pobla.getMejor();
             //this.poblacion = pobla new Individuo[tammPoblacion];
-            pobla.getTodosIndividuos()[0] = /*new Individuo(*/poblacion.getMejor();//);
-            pobla.calcFitnessMejorado();
-            poblacion = pobla;
-            //this.mejorIndivi = new Individuo(this.calculaFitness());
-            System.out.println("Generación " + i + ": " + this.mejorIndivi.getFitness());
-            System.out.println("\nLa solucion: " + Arrays.toString(poblacion.getMejor().getSolucion()));
-            System.out.println("\nFitness: " + poblacion.getMejor().getFitness());
+            pobla.getTodosIndividuos()[0] = /*new Individuo(*/pobla.getMejor();//);
+            //pobla.calcFitnessMejorado();
+                        
+            System.out.println("Generación " + i + ": " );
+            //System.out.println("\nLa solucion: " + mejor.getGenes(i));
+            System.out.println("\nLa solucion: " + Arrays.toString(mejor.getSolution()));
+            System.out.println("\nFitness: " + mejor.getFitness());
         }
     
     }

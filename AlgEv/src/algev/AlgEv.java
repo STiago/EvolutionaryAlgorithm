@@ -243,18 +243,35 @@ public class AlgEv {
     
     //Algoritmo Baldwiniano
     public void AlgoritmoBaldwiniano(){
-        Poblacion poblacion = new Poblacion(tammPoblacion);
-        
+        Poblacion pobla= new Poblacion(tammPoblacion);
+         
         for(int i=0; i<numeroGeneraciones; i++){
             Poblacion nuevapoblacion = new Poblacion(tammPoblacion);
-            //Seleccion
-            Individuo[] padres = Seleccion(poblacion);
-            //Cruce
-            Individuo[] hijos = Cruce(padres[0], padres[1]);
-            //Mutacion
-            Mutacion(hijos[0]);
-            Mutacion(hijos[1]);
-            //Insertamos los hijos en la nueva poblacion
+            for(int j=0; j<tammPoblacion/2; j++){
+                //Seleccion;
+                Individuo[] padres = Seleccion(pobla);
+                //Cruce
+                Individuo[] hijos = Cruce(padres[0], padres[1]);
+                //Mutacion
+                Mutacion(hijos[0]);
+                Mutacion(hijos[1]);
+
+                hijos[0].getFitness();
+                hijos[1].getFitness();
+
+                //Insertamos los hijos en la nueva poblacion
+                pobla.setIndividuo(j, hijos[0]);
+                pobla.setIndividuo(j+1, hijos[1]);
+            }
+            nuevapoblacion.getTodosIndividuos()[0] = pobla.getMejor();
+            pobla = nuevapoblacion;
+            Individuo mejor = pobla.getMejor();
+            
+            //pobla.calcFitnessMejorado();
+                        
+            System.out.println("Generación " + i + ": " );
+            System.out.println("\nLa solucion: " + Arrays.toString(mejor.getGenes()));
+            System.out.println("\nFitness: " + mejor.getFitness());
         }
     }
     

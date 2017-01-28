@@ -94,9 +94,15 @@ public class Poblacion {
          }
     }
     
-    public void calcFitnessMejorado(/*AlgEv al*/) {
+    public void calcFitnessMejoradoBaldwin(/*AlgEv al*/) {
         for (int i = 0; i < individuos.length; i++) {
-            individuos[i].calcFitnessMejorado(/*al*/);
+            individuos[i].calcFitnessMejoradoBaldwin(/*al*/);
+        }
+    }
+    
+    public void calcFitnessMejoradoLamarck(/*AlgEv al*/) {
+        for (int i = 0; i < individuos.length; i++) {
+            individuos[i].calcFitnessMejoradoLamarck(/*al*/);
         }
     }
     

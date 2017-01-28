@@ -61,6 +61,65 @@ public class Individuo{
         return fitness;
     }
     
+    //Metodo para intercambiar elementos
+    public void Intercambia(int primero, int segundo){
+		int auxiliar;
+		
+		auxiliar = primero;
+		primero = segundo;
+		segundo = auxiliar;
+    }
+/*    
+S = candidato inicial con coste c ( S )
+
+do {
+
+mejor = S
+
+for i =1.. n
+for j = i +1.. n
+T = S tras intercambiar i con j
+if c ( T ) < c ( S )
+S = T
+
+
+} while ( S != mejor )
+
+*/    
+    //Calcular 2-opt
+    private Individuo greedy(/*Individuo[] mipoblacion*/) {
+        //Individuo busqueda = new Individuo();
+        double mejorg = 0;
+        int mejorpos= 0;
+        Individuo s = new Individuo(this);
+        Individuo mejor;
+        
+        s.calculaFitness();
+        
+        do{
+            mejor = s;
+                
+            for(int i=0; i<genes.length; ++i){
+                for(int j=i+1; j<genes.length/*-1*/; ++j){
+                    Individuo t = new Individuo(s);
+                    Intercambia(t.getGenes(i), t.getGenes(j));
+                    t.setGene(i, t.getGenes(i));
+                    t.setGene(j, t.getGenes(j));
+                    
+                    t.nuevoFitness();
+                    
+                    if(s.getFitness()> t.getFitness()){ 
+                        s = new Individuo(t);
+                        //mejorind = new Individuo(mipoblacion[mejorpos]);
+                    }
+                }
+            }
+            
+        }while(s.getFitness()<mejor.getFitness());
+        
+        return s;
+    } 
+    
     //Métodos para calcular el Fitness
     public void calculaFitness(){
         fitness = 0;
@@ -72,11 +131,37 @@ public class Individuo{
             }
         }
     }
+    
+    public void nuevoFitness(){}
 
     //Recalcular fitness con busqueda local para baldwiniano y lamarckiano
-    void calcFitnessMejorado(/*AlgEv al*/) {
-        //Busqueda local
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void calcFitnessMejoradoBaldwin(/*AlgEv al*/) {
+        int tamPro = AlgEv.tamanioProblema;
+        Individuo mejors;
+        //if (mejors == null) {mejorsolucion
+            mejors = greedy();
+        //}
+        fitness = 0;
+        for (int i = 0; i < tamPro; i++) {
+            for (int j = 0; j < tamPro; j++) {
+                fitness += AlgEv.pesos[i][j] * AlgEv.distancias[mejorsolucion[i]][mejorsolucion[j]];
+            }
+        }
+    }
+    
+    void calcFitnessMejoradoLamarck(/*AlgEv al*/) {
+        int tamPro = AlgEv.tamanioProblema;
+        
+        if (mejorsolucion == null) {
+            //mejorsolucion = greedy(); CAMBIAR!
+            genes = mejorsolucion;
+        }
+        fitness = 0;
+        for (int i = 0; i < tamPro; i++) {
+            for (int j = 0; j < tamPro; j++) {
+                fitness += AlgEv.pesos[i][j] * AlgEv.distancias[mejorsolucion[i]][mejorsolucion[j]];
+            }
+        }
     }
     
     //Metodo de permutacion
@@ -90,6 +175,7 @@ public class Individuo{
         calculaFitness();
         return mejorsolucion;
     }
+    
     
     @Override
     public String toString() {

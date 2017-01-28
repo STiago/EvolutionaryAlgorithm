@@ -195,7 +195,7 @@ public class AlgEv {
         for(int i=0; i<mipoblacion.length; ++i){
             for(int j=i+1; j<tammPoblacion-1; j++){
                 Intercambia(mipoblacion[i], mipoblacion[j]);
-                if(mipoblacion[i].getFitness()< mejorg){
+                if(mipoblacion[i].getFitness()< mejorg){ //getGenes
                     mejorpos = i;
                     mejorg = mipoblacion[i].getFitness();
                 }

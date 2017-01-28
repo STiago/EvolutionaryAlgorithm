@@ -30,6 +30,7 @@ public class AlgEv {
     //private Poblacion poblacion;
     private final int tammPoblacion= 10;
     private Individuo mejorIndivi;
+    private static final double mutacionIndivi = 0.75;
     
     /*
     public AlgEv() {
@@ -169,16 +170,25 @@ public class AlgEv {
     
     //Método para realizar la mutacion    
     public void Mutacion(Individuo aMutar){
-        for(int i=0; i<aMutar.tamanio(); i++){
-            if (Math.random() <= mutacion) {   
-                int gen = (int) Math.round(Math.random());
-                int aux = aMutar.getGenes(gen);
-                aMutar.setGene(gen, aMutar.getGenes(i));
-                aMutar.setGene(i, aux);
+        Random r = new Random();
+        double probabilidad = r.nextDouble();
+        if(probabilidad<mutacionIndivi){
+            for(int i=0; i</*aMutar.tamanio()*/tamanioProblema; i++){
+                probabilidad = r.nextDouble();
+                if (/*Math.random()*/probabilidad <= mutacion) { 
+                    int gen;
+                    do{
+                        gen = r.nextInt(aMutar.tamanio());//(int) Math.round(Math.random());
+                    }while(gen==i);
+                    aMutar.IntercambiaMutacion(i,gen);
+                    //int aux = aMutar.getGenes(gen);
+                    //aMutar.setGene(gen, aMutar.getGenes(i));
+                    //aMutar.setGene(i, aux);
+                }
             }
-        }
-                 
+        }           
     }
+    
     /*
     //Get Fittest
     public Individuo getFittest() {
@@ -208,7 +218,7 @@ public class AlgEv {
     //Algoritmo simple
     public void AlgoritmoSimple(){
         Poblacion pobla= new Poblacion(tammPoblacion);
-         
+        
         for(int i=0; i<numeroGeneraciones; i++){
             Poblacion nuevapoblacion = new Poblacion(tammPoblacion);
             for(int j=0; j<tammPoblacion/2; j++){
@@ -222,7 +232,8 @@ public class AlgEv {
 
                 hijos[0].getFitness();
                 hijos[1].getFitness();
-
+                System.out.println(hijos[1]);
+                
                 //Insertamos los hijos en la nueva poblacion
                 pobla.setIndividuo(j, hijos[0]);
                 pobla.setIndividuo(j+1, hijos[1]);
@@ -231,7 +242,7 @@ public class AlgEv {
             pobla = nuevapoblacion;
             Individuo mejor = pobla.getMejor();
             
-            //pobla.calcFitnessMejorado();
+            //pobla.calculaFitness();
                         
             System.out.println("Generación " + i + ": " );
             //System.out.println("\nLa solucion: " + mejor.getGenes(i));
@@ -267,7 +278,7 @@ public class AlgEv {
             pobla = nuevapoblacion;
             Individuo mejor = pobla.getMejor();
             
-            //pobla.calcFitnessMejorado();
+            //pobla.calcFitnessMejoradoBaldwin();
                         
             System.out.println("Generación " + i + ": " );
             System.out.println("\nLa solucion: " + Arrays.toString(mejor.getGenes()));
@@ -282,7 +293,7 @@ public class AlgEv {
         for(int i=0; i<numeroGeneraciones; i++){
             Poblacion nuevapoblacion = new Poblacion(tammPoblacion);
             for(int j=0; j<tammPoblacion/2; j++){
-                //Seleccion;
+                //Seleccion;\begin{document}
                 Individuo[] padres = Seleccion(pobla);
                 //Cruce
                 Individuo[] hijos = Cruce(padres[0], padres[1]);

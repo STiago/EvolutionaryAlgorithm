@@ -94,6 +94,13 @@ public class Poblacion {
          }
     }
     
+    //Métodos para calcular el Fitness
+    public void calculaFitness(){
+       for (int i = 0; i < individuos.length; i++) {
+            individuos[i].calculaFitness(/*al*/);
+        }
+    }
+    
     public void calcFitnessMejoradoBaldwin(/*AlgEv al*/) {
         for (int i = 0; i < individuos.length; i++) {
             individuos[i].calcFitnessMejoradoBaldwin(/*al*/);

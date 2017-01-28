@@ -69,19 +69,28 @@ public class Individuo{
 		primero = segundo;
 		segundo = auxiliar;
     }
-/*    
+    
+    //Metodo para intercambiar elementos
+    public void IntercambiaMutacion(int primero, int segundo){
+		int auxiliar;
+                
+		auxiliar = genes[primero];
+		genes[primero] = genes[segundo];
+		genes[segundo] = auxiliar;
+    }
+    
+/*Algoritmo 2-opt 
 S = candidato inicial con coste c ( S )
 
 do {
 
-mejor = S
+    mejor = S
 
-for i =1.. n
-for j = i +1.. n
-T = S tras intercambiar i con j
-if c ( T ) < c ( S )
-S = T
-
+    for i =1.. n
+        for j = i +1.. n
+            T = S tras intercambiar i con j
+            if c ( T ) < c ( S )
+                S = T
 
 } while ( S != mejor )
 

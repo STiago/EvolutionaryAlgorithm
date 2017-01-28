@@ -22,6 +22,18 @@ public class Individuo{
         
     }
     
+    
+    private void copia(Individuo otro){
+        this.genes = otro.getGenes();
+        this.fitness = otro.getFitness();
+        this.mejorsolucion = otro.mejorsolucion;
+    }
+    
+    //Constructor de copia
+    public Individuo(Individuo otro){
+        copia(otro);
+    }
+    
     private void randomIndividuo(){
         for(int i=0; i<AlgEv.tamanioProblema; i++ ){
             genes[i] = i;
@@ -67,14 +79,14 @@ public class Individuo{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    //Metodo solucion
-    public int[] getSolucion(){
-        int tsolucion=mejorsolucion.length;
+    //Metodo de permutacion
+    public int[] getSolucionPermutacion(){
+        int tsolucion=genes.length;
         
         for(int i=0; i<tsolucion; i++ ){
-            mejorsolucion[i] = i;
+            genes[i] = i;
         }
-        Herramientas.shuffleArray(mejorsolucion);
+        Herramientas.shuffleArray(genes);
         calculaFitness();
         return mejorsolucion;
     }

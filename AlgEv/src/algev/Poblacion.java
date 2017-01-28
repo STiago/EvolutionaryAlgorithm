@@ -16,8 +16,9 @@ public class Poblacion {
     
     //Constructor Poblacion
     public Poblacion(int numeroindividuos ) {
+        //tamanioPoblacion = numeroindividuos;
+        individuos = new Individuo[numeroindividuos];   
         tamanioPoblacion = numeroindividuos;
-        individuos = new Individuo[tamanioPoblacion];      
         
         for(int i=0; i<tamanioPoblacion; i++){
             individuos[i] = new Individuo();

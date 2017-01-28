@@ -159,14 +159,13 @@ public class AlgEv {
     }
     
     //Metodo para intercambiar elementos
-    /*
-    public void Intercambia(int primero, int segundo){
-		int auxiliar;
+    public void Intercambia(Individuo primero, Individuo segundo){
+		Individuo auxiliar;
 		
 		auxiliar = primero;
 		primero = segundo;
 		segundo = auxiliar;
-    }*/
+    }
     
     //Método para realizar la mutacion    
     public void Mutacion(Individuo aMutar){
@@ -185,6 +184,26 @@ public class AlgEv {
     public Individuo getFittest() {
         return poblacion.getMejor();
     }*/
+    
+    //Greedy busqueda local
+    private Individuo greedy(Individuo[] mipoblacion) {
+        //Individuo busqueda = new Individuo();
+        double mejorg = 0;
+        int mejorpos= 0;
+        Individuo mejorind;
+        
+        for(int i=0; i<mipoblacion.length; ++i){
+            for(int j=i+1; j<tammPoblacion-1; j++){
+                Intercambia(mipoblacion[i], mipoblacion[j]);
+                if(mipoblacion[i].getFitness()< mejorg){
+                    mejorpos = i;
+                    mejorg = mipoblacion[i].getFitness();
+                }
+            }
+        }
+        mejorind = new Individuo(mipoblacion[mejorpos]);
+        return mejorind;
+    }    
     
     //Algoritmo simple
     public void AlgoritmoSimple(){

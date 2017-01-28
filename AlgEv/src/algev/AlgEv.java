@@ -113,15 +113,18 @@ public class AlgEv {
         boolean [] hijo0 = new boolean [tamanioProblema];
         boolean [] hijo1 = new boolean [tamanioProblema];
         int contadorPadre=0, contadorMadre=0;
+        Random random = new Random(System.currentTimeMillis());
         
         Arrays.fill(hijo0,false);
         Arrays.fill(hijo1,false);
         
-        int posicionAleatoria1 = (int) (Math.random() * tamanioProblema);
+        
+        
+        int posicionAleatoria1 = random.nextInt(tamanioProblema);
         int posicionAleatoria2;
         
         do{//comprobamos que la posicion no es la misma
-            posicionAleatoria2 = (int) (Math.random() * tamanioProblema); 
+            posicionAleatoria2 = random.nextInt(tamanioProblema);
         }while(posicionAleatoria1==posicionAleatoria2);
         
         int inicio = Math.min(posicionAleatoria1, posicionAleatoria2);
@@ -141,6 +144,8 @@ public class AlgEv {
             while(hijo1[contadorPadre]){
                 contadorPadre++;
             }
+            hijo0[contadorMadre] = true;
+            hijo1[contadorPadre] = true;
             hijos[0].setGene(i,madre.getGenes(contadorMadre));
             hijos[1].setGene(i,padre.getGenes(contadorPadre));
         }
@@ -152,6 +157,8 @@ public class AlgEv {
             while(hijo1[contadorPadre]){
                 contadorPadre++;
             }
+            hijo0[contadorMadre] = true;
+            hijo1[contadorPadre] = true;
             hijos[0].setGene(i,madre.getGenes(contadorMadre));
             hijos[1].setGene(i,padre.getGenes(contadorPadre));
         }
@@ -226,13 +233,14 @@ public class AlgEv {
                 Individuo[] padres = Seleccion(pobla);
                 //Cruce
                 Individuo[] hijos = Cruce(padres[0], padres[1]);
+                System.out.println(hijos[0]);
                 //Mutacion
                 Mutacion(hijos[0]);
                 Mutacion(hijos[1]);
 
                 hijos[0].getFitness();
                 hijos[1].getFitness();
-                System.out.println(hijos[1]);
+                //System.out.println(hijos[1]);
                 
                 //Insertamos los hijos en la nueva poblacion
                 pobla.setIndividuo(j, hijos[0]);

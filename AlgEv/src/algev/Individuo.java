@@ -1,54 +1,55 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
  */
 package algev;
+
+import java.util.Arrays;
+
 /**
  *
  * @author victoria
  */
-public class Individuo{
-    
+public class Individuo {
+
     private int fitness = 0;
     private int[] genes = null;
     private int[] mejorsolucion;
-   
-    
-    public Individuo(){
-        genes = new int [AlgEv.tamanioProblema];
+
+    public Individuo() {
+        genes = new int[AlgEv.tamanioProblema];
         randomIndividuo();
         calculaFitness();
-        
+
     }
-    
-    
-    private void copia(Individuo otro){
+
+    private void copia(Individuo otro) {
         this.genes = otro.getGenes();
         this.fitness = otro.getFitness();
         this.mejorsolucion = otro.mejorsolucion;
     }
-    
+
     //Constructor de copia
-    public Individuo(Individuo otro){
+    public Individuo(Individuo otro) {
         copia(otro);
     }
-    
-    private void randomIndividuo(){
-        for(int i=0; i<AlgEv.tamanioProblema; i++ ){
+
+    private void randomIndividuo() {
+        for (int i = 0; i < AlgEv.tamanioProblema; i++) {
             genes[i] = i;
         }
         Herramientas.shuffleArray(genes);
     }
-    
+
     public void setGene(int posicion, int nuevovalor) {
         genes[posicion] = nuevovalor;
     }
-    
-    public int[] getGenes() { 
+
+    public int[] getGenes() {
         return genes;
     }
-    
+
     public int getGenes(int posicion) {
         return this.genes[posicion];
     }
@@ -60,26 +61,26 @@ public class Individuo{
     public int getFitness() {
         return fitness;
     }
-    
+
     //Metodo para intercambiar elementos
-    public void Intercambia(int primero, int segundo){
-		int auxiliar;
-		
-		auxiliar = primero;
-		primero = segundo;
-		segundo = auxiliar;
+    public void Intercambia(int primero, int segundo) {
+        int auxiliar;
+
+        auxiliar = primero;
+        primero = segundo;
+        segundo = auxiliar;
     }
-    
+
     //Metodo para intercambiar elementos
-    public void IntercambiaMutacion(int primero, int segundo){
-		int auxiliar;
-                
-		auxiliar = genes[primero];
-		genes[primero] = genes[segundo];
-		genes[segundo] = auxiliar;
+    public void IntercambiaMutacion(int primero, int segundo) {
+        int auxiliar;
+
+        auxiliar = genes[primero];
+        genes[primero] = genes[segundo];
+        genes[segundo] = auxiliar;
     }
-    
-/*Algoritmo 2-opt 
+
+    /*Algoritmo 2-opt 
 S = candidato inicial con coste c ( S )
 
 do {
@@ -94,61 +95,60 @@ do {
 
 } while ( S != mejor )
 
-*/    
+     */
     //Calcular 2-opt
     private Individuo greedy(/*Individuo[] mipoblacion*/) {
         //Individuo busqueda = new Individuo();
-        double mejorg = 0;
-        int mejorpos= 0;
+        //double mejorg = 0;
+        //int mejorpos = 0;
         Individuo s = new Individuo(this);
         Individuo mejor;
-        
+
         s.calculaFitness();
-        
-        do{
+
+        do {
             mejor = s;
-                
-            for(int i=0; i<genes.length; ++i){
-                for(int j=i+1; j<genes.length/*-1*/; ++j){
+
+            for (int i = 0; i < genes.length; ++i) {
+                for (int j = i + 1; j < genes.length/*-1*/; ++j) {
                     Individuo t = new Individuo(s);
                     Intercambia(t.getGenes(i), t.getGenes(j));
                     t.setGene(i, t.getGenes(i));
                     t.setGene(j, t.getGenes(j));
-                    
+
                     t.nuevoFitness();
-                    
-                    if(s.getFitness()> t.getFitness()){ 
+
+                    if (s.getFitness() > t.getFitness()) {
                         s = new Individuo(t);
                         //mejorind = new Individuo(mipoblacion[mejorpos]);
                     }
                 }
             }
-            
-        }while(s.getFitness()<mejor.getFitness());
-        
+
+        } while (s.getFitness() < mejor.getFitness());
+
         return s;
-    } 
-    
+    }
+
     //Métodos para calcular el Fitness
-    public void calculaFitness(){
+    public void calculaFitness() {
         fitness = 0;
         int tamPro = AlgEv.tamanioProblema;
-        
-        for(int i=0; i<tamPro; i++){
-            for(int j=0; j<tamPro; j++){
-                fitness += AlgEv.pesos[i][j] * AlgEv.distancias[genes[i]][genes[j] ];
+
+        for (int i = 0; i < tamPro; i++) {
+            for (int j = 0; j < tamPro; j++) {
+                fitness += AlgEv.pesos[i][j] * AlgEv.distancias[genes[i]][genes[j]];
             }
         }
     }
-    
-    public void nuevoFitness(){}
+
+    public void nuevoFitness() {
+    }
 
     //Recalcular fitness con busqueda local para baldwiniano y lamarckiano
     void calcFitnessMejoradoBaldwin(/*AlgEv al*/) {
         int tamPro = AlgEv.tamanioProblema;
-        Individuo mejors;
-        //if (mejors == null) {mejorsolucion
-            mejors = greedy();
+        Individuo mejors =greedy();
         //}
         fitness = 0;
         for (int i = 0; i < tamPro; i++) {
@@ -157,14 +157,15 @@ do {
             }
         }
     }
-    
+
     void calcFitnessMejoradoLamarck(/*AlgEv al*/) {
         int tamPro = AlgEv.tamanioProblema;
-        
-        if (mejorsolucion == null) {
-            //mejorsolucion = greedy(); CAMBIAR!
+        Individuo mejors =greedy();
+
+        //if (mejorsolucion == null) {
+            //mejors = greedy(); CAMBIAR!
             genes = mejorsolucion;
-        }
+        //}
         fitness = 0;
         for (int i = 0; i < tamPro; i++) {
             for (int j = 0; j < tamPro; j++) {
@@ -172,20 +173,19 @@ do {
             }
         }
     }
-    
+
     //Metodo de permutacion
-    public int[] getSolucionPermutacion(){
-        int tsolucion=genes.length;
-        
-        for(int i=0; i<tsolucion; i++ ){
+    public int[] getSolucionPermutacion() {
+        int tsolucion = genes.length;
+
+        for (int i = 0; i < tsolucion; i++) {
             genes[i] = i;
         }
         Herramientas.shuffleArray(genes);
         calculaFitness();
         return mejorsolucion;
     }
-    
-    
+
     @Override
     public String toString() {
         String cadena = "[";
@@ -195,6 +195,6 @@ do {
         }
 
         return cadena.substring(0, cadena.length() - 1) + "]";
-}
-    
+    }
+
 }

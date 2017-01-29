@@ -182,7 +182,7 @@ public class AlgEv {
         if(probabilidad<mutacionIndivi){
             for(int i=0; i</*aMutar.tamanio()*/tamanioProblema; i++){
                 probabilidad = r.nextDouble();
-                if (/*Math.random()*/probabilidad <= mutacion) { 
+                if (/*Math./*random()*/probabilidad <= mutacion) { 
                     int gen;
                     do{
                         gen = r.nextInt(aMutar.tamanio());//(int) Math.round(Math.random());
@@ -257,7 +257,6 @@ public class AlgEv {
             System.out.println("\nLa solucion: " + Arrays.toString(mejor.getGenes()));
             System.out.println("\nFitness: " + mejor.getFitness());
         }
-    
     }
     
     //Algoritmo Baldwiniano
@@ -286,7 +285,7 @@ public class AlgEv {
             pobla = nuevapoblacion;
             Individuo mejor = pobla.getMejor();
             
-            //pobla.calcFitnessMejoradoBaldwin();
+            pobla.calcFitnessMejoradoBaldwin();
                         
             System.out.println("Generación " + i + ": " );
             System.out.println("\nLa solucion: " + Arrays.toString(mejor.getGenes()));
@@ -320,7 +319,7 @@ public class AlgEv {
             pobla = nuevapoblacion;
             Individuo mejor = pobla.getMejor();
             
-            //pobla.calcFitnessMejorado();
+            pobla.calcFitnessMejoradoLamarck();
                         
             System.out.println("Generación " + i + ": " );
             //System.out.println("\nLa solucion: " + mejor.getGenes(i));

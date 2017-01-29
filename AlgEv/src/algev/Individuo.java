@@ -148,7 +148,7 @@ do {
     //Recalcular fitness con busqueda local para baldwiniano y lamarckiano
     void calcFitnessMejoradoBaldwin(/*AlgEv al*/) {
         int tamPro = AlgEv.tamanioProblema;
-        Individuo mejors =greedy();
+        //mejorsolucion = greedy();
         //}
         fitness = 0;
         for (int i = 0; i < tamPro; i++) {

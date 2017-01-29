@@ -97,7 +97,7 @@ do {
 
      */
     //Calcular 2-opt
-    private Individuo greedy(/*Individuo[] mipoblacion*/) {
+    private int[] greedy(/*Individuo[] mipoblacion*/) {
         //Individuo busqueda = new Individuo();
         //double mejorg = 0;
         //int mejorpos = 0;
@@ -127,7 +127,7 @@ do {
 
         } while (s.getFitness() < mejor.getFitness());
 
-        return s;
+        return s.getGenes();
     }
 
     //Métodos para calcular el Fitness
@@ -149,6 +149,11 @@ do {
     void calcFitnessMejoradoBaldwin(/*AlgEv al*/) {
         int tamPro = AlgEv.tamanioProblema;
         //mejorsolucion = greedy();
+        //Individuo s = greedy();
+        //mejorsolucion = s.mejorsolucion;
+        mejorsolucion = greedy();
+        //genes = mejorsolucion;
+        //calculaFitness();
         //}
         fitness = 0;
         for (int i = 0; i < tamPro; i++) {
@@ -160,7 +165,9 @@ do {
 
     void calcFitnessMejoradoLamarck(/*AlgEv al*/) {
         int tamPro = AlgEv.tamanioProblema;
-        Individuo mejors =greedy();
+        /*Individuo mejors =greedy();
+        mejorsolucion = mejors.mejorsolucion;*/
+        mejorsolucion = greedy();
 
         //if (mejorsolucion == null) {
             //mejors = greedy(); CAMBIAR!

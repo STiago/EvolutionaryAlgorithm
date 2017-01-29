@@ -22,7 +22,7 @@ public class AlgEv {
     public static int [][] pesos;
     
     private static final double mutacion = 0.015;
-    private static final int numeroGeneraciones = 20;
+    private static final int numeroGeneraciones = 1000;
     
     private static final int tamTorneo = 5;
     
@@ -233,7 +233,7 @@ public class AlgEv {
                 Individuo[] padres = Seleccion(pobla);
                 //Cruce
                 Individuo[] hijos = Cruce(padres[0], padres[1]);
-                System.out.println(hijos[0]);
+                //System.out.println(hijos[0]);
                 //Mutacion
                 Mutacion(hijos[0]);
                 Mutacion(hijos[1]);
@@ -335,25 +335,25 @@ public class AlgEv {
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
         leerFicheros("qap.datos/tai256c.dat");
-        System.out.println("Tamanio del problema:");
-        System.out.println(tamanioProblema);
+        //System.out.println("Tamanio del problema:");
+        //System.out.println(tamanioProblema);
         
         //Imprime matriz distancias
-        System.out.println("Matriz de distancias:");
+        /*System.out.println("Matriz de distancias:");
         for (int x=0; x < distancias.length; x++) {
             for (int y=0; y < distancias.length; y++) {
                 System.out.print (distancias[x][y]);
                 if (y!=pesos[x].length-1) System.out.print("\t");
             }
-        }
+        }*/
         //Imprime matriz pesos
-        System.out.println("\nMatriz de pesos:");
+        /*System.out.println("\nMatriz de pesos:");
         for (int x=0; x < pesos.length; x++) {
             for (int y=0; y < pesos.length; y++) {
                 System.out.print (pesos[x][y]);
                 if (y!=pesos[x].length-1) System.out.print("\t");
             }
-        }
+        }*/
         
         
         int tamPob = tamanioProblema, generations = numeroGeneraciones;
@@ -382,7 +382,7 @@ public class AlgEv {
                     solucionAlg.AlgoritmoSimple();
                     finAlg= System.currentTimeMillis();
                     System.out.println("-------------- Resultados Algoritmo simple --------------");
-                    System.out.println("Time: " + (finAlg - inicioAlg) / 1000);
+                    System.out.println("Tiempo: " + (finAlg - inicioAlg) / 1000);
                     break;
                 case "B":
                     System.out.println("Algoritmo Baldwiniano");
@@ -391,7 +391,7 @@ public class AlgEv {
                     solucionAlg.AlgoritmoBaldwiniano();
                     finAlg= System.currentTimeMillis();
                     System.out.println("-------------- Resultados Algoritmo Baldwiniano --------------");
-                    System.out.println("Time: " + (finAlg - inicioAlg) / 1000);
+                    System.out.println("Tiempo: " + (finAlg - inicioAlg) / 1000);
                     break;
                 case "L":
                     System.out.println("Algoritmo Lamarckiano");
@@ -400,7 +400,7 @@ public class AlgEv {
                     solucionAlg.AlgoritmoLamarckiano();
                     finAlg= System.currentTimeMillis();
                     System.out.println("-------------- Resultados Algoritmo Lamarckiano --------------");
-                    System.out.println("Time: " + (finAlg - inicioAlg) / 1000);
+                    System.out.println("Tiempo: " + (finAlg - inicioAlg) / 1000);
                     break;
                 default:
                     System.out.println("[ERROR]-Opcion invalida.");

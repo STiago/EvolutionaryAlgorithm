@@ -19,5 +19,5 @@ _Texto_ liberado bajo la licencia **Creative Commons Attribution-ShareAlike 4.0 
 </a>
 </p>
 
-Enlace a la documentacion [aquí]()
+Enlace a la documentación se encuentra en la siguiente [memoria](https://github.com/STiago/EvolutionaryAlgorithm/blob/master/meoria.pdf) .
 
